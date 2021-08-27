@@ -25,6 +25,7 @@
 #import <WootricSDK/Wootric.h>
 #import <WootricSDK/SEGWootric.h>
 #import <WootricSDK/WTRLogger.h>
+#import <WootricSDK/WTRLogLevel.h>
 #import <WootricSDK/WTRSurveyDelegate.h>
 
 FOUNDATION_EXPORT double WootricSDKMainVersionNumber;

@@ -35,9 +35,15 @@
   for (NSString *font in fonts) {
     NSString *fontPath = [[NSBundle bundleForClass:[UIItems class]] pathForResource:font ofType:@"ttf"];
 
+#if SWIFT_PACKAGE
+    if ([fontPath length] == 0) {
+      fontPath = [SWIFTPM_MODULE_BUNDLE pathForResource:font ofType:@"ttf"];
+    }
+#endif
+
     CFErrorRef error;
     NSURL *url = [NSURL fileURLWithPath:fontPath isDirectory:NO];
-    if (!CTFontManagerRegisterFontsForURL((__bridge CFURLRef)url, kCTFontManagerScopeNone, &error)) {
+    if (!CTFontManagerRegisterFontsForURL((__bridge CFURLRef)url, kCTFontManagerScopeProcess, &error)) {
       if (CFErrorGetCode(error) == kCTFontManagerErrorAlreadyRegistered) {
         CFRelease(error);
         return;
